@@ -1,0 +1,34 @@
+# --- Python General ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Django ---
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Si usas carpeta de uploads (media), generalmente no se sube:
+media/
+staticfiles/
+
+# --- Entornos Virtuales (¡Muy Importante!) ---
+# Para que no subas las miles de librerías instaladas
+p1_env/
+env/
+venv/
+.venv/
+
+# --- VS Code ---
+.vscode/
+
+# --- Coverage y Tests ---
+.coverage
+htmlcov/
+# NOTA: NO ignoramos 'coverage.txt' porque es parte de tu entrega.
+# coverage.txt 
+
+# --- Archivos de sistema ---
+.DS_Store
+Thumbs.db
