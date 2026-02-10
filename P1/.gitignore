@@ -6,14 +6,19 @@ __pycache__/
 
 *.log
 local_settings.py
-db.sqlite3
-db.sqlite3-journal
 
 p1_env/
 env/
 venv/
 .venv/
 .vscode/
+
+# Environment variables (contains secrets!)
+.env
+.md
+.flake8
+# Static files collected for deployment
+staticfiles/
 
 .coverage
 htmlcov/
@@ -23,4 +28,5 @@ htmlcov/
 Thumbs.db
 
 
-*.sh
+# Ignore test script but allow build.sh for Render
+tests.sh

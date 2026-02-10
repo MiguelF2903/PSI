@@ -2,6 +2,7 @@ from django.test import TestCase
 from catalog.models import Author, Genre, Book, BookInstance, Language
 from django.urls.exceptions import NoReverseMatch
 
+
 class CoverageGapTests(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -18,10 +19,10 @@ class CoverageGapTests(TestCase):
         )
         # Asociamos el género al libro para probar display_genre
         cls.book.genre.add(cls.genre)
-        
+
         cls.instance = BookInstance.objects.create(
-            book=cls.book, 
-            imprint='Test Imprint', 
+            book=cls.book,
+            imprint='Test Imprint',
             status='a'
         )
 
@@ -39,14 +40,14 @@ class CoverageGapTests(TestCase):
 
     def test_missing_urls(self):
         """
-        Intenta ejecutar get_absolute_url para Language y Genre (Líneas 17 y 28).
+        Intenta ejecutar get_absolute_url para Language y Genre (Líneas 17 y 28).  # noqa: E501
         Como las URLs 'language-detail' no existen en urls.py, capturamos
-        el error NoReverseMatch, pero la línea cuenta como 'ejecutada' para coverage.
+        el error NoReverseMatch, pero la línea cuenta como 'ejecutada' para coverage.  # noqa: E501
         """
         try:
             self.lang.get_absolute_url()
         except NoReverseMatch:
-            pass # Ignoramos el error, solo queríamos tocar la línea
+            pass  # Ignoramos el error, solo queríamos tocar la línea
 
         try:
             self.genre.get_absolute_url()

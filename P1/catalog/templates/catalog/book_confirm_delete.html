@@ -1,0 +1,20 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Delete Book: {{ book.title }}</h1>
+  
+  {% if book.bookinstance_set.all %}
+    <div class="alert alert-warning">
+      <p><strong>Warning:</strong> This book has physical copies (BookInstances) associated with it.</p> 
+      <p>If you delete this book, the copies might also be deleted or cause an error depending on database settings.</p>
+    </div>
+  {% endif %}
+
+  <p>Are you sure you want to delete the book: <strong>{{ book.title }}</strong>?</p>
+  
+  <form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Yes, delete" class="btn btn-danger">
+    <a href="{% url 'books' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+{% endblock %}
