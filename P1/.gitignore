@@ -13,14 +13,13 @@ venv/
 .venv/
 .vscode/
 
-# Environment variables (contains secrets!)
-.env
 .flake8
-# Static files collected for deployment
 staticfiles/
 
 .coverage
 htmlcov/
+
+
 
 
 .DS_Store
