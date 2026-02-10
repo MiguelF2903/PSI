@@ -2,16 +2,46 @@
 
 {% block content %}
   <h1>Author List</h1>
+
   {% if author_list %}
   <ul>
     {% for author in author_list %}
       <li>
-        <a href="{{ author.get_absolute_url }}">{{ author }}</a>
-        ({{author.date_of_birth|default:"-"}} - {{author.date_of_death|default:"-"}})
+        <a href="{{ author.get_absolute_url }}">
+          {{ author.last_name }}, {{ author.first_name }}
+        </a> 
+        ({{ author.date_of_birth }} - {% if author.date_of_death %}{{ author.date_of_death }}{% endif %})
+
+        {% if user.is_staff %}
+          - 
+          {% if perms.catalog.change_author %}
+            <a href="{% url 'author-update' author.pk %}">Edit</a>
+          {% endif %}
+          {% if perms.catalog.delete_author %}
+             | <a href="{% url 'author-delete' author.pk %}" class="text-danger">Delete</a>
+          {% endif %}
+        {% endif %}
+        
       </li>
     {% endfor %}
   </ul>
   {% else %}
     <p>There are no authors in the library.</p>
   {% endif %}
-{% endblock %}
+
+  {% if is_paginated %}
+    <div class="pagination">
+        <span class="page-links">
+            {% if page_obj.has_previous %}
+                <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="page-current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+            {% if page_obj.has_next %}
+                <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
+  {% endif %}
+  {% endblock %}
