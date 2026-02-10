@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>{% if object %}Edit Book: {{ object.title }}{% else %}Create New Book{% endif %}</h1>
+  
+  <form action="" method="post">
+    {% csrf_token %}
+    <table class="table">
+      {{ form.as_table }}
+    </table>
+    <input type="submit" value="Submit" class="btn btn-primary">
+  </form>
+{% endblock %}
