@@ -15,7 +15,6 @@ venv/
 
 # Environment variables (contains secrets!)
 .env
-.md
 .flake8
 # Static files collected for deployment
 staticfiles/
