@@ -30,7 +30,7 @@ load_dotenv(env_path)
 # SECRET_KEY =
 # 'django-insecure-1(&^#bxygha-vb(5zhufm^=rk#e)$s#%&5q06y0g#ot_bt1ia%'
 SECRET_KEY = os.environ.get(
-    'DJANGO_SECRET_KEY',
+    'SECRET_KEY',
     'django-insecure-1(&^#bxygha-vb(5zhufm^=rk#e)$s#%&5q06y0g#ot_bt1ia%')
 
 # SECURITY WARNING: don't run with debug turned on in production!
