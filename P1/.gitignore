@@ -25,5 +25,6 @@ htmlcov/
 Thumbs.db
 
 
-*.sh
+reset.sh
+tests.sh
 *.md
