@@ -5,11 +5,9 @@ admin.site.register(Genre)
 admin.site.register(Language)
 
 
-# --- REQUISITO DEL TEST: test_challenge_part4_two ---
-# Debemos crear un Inline para ver los libros DENTRO del autor
 class BooksInline(admin.TabularInline):
     model = Book
-    extra = 0  # Requisito del test
+    extra = 0
 
 
 class AuthorAdmin(admin.ModelAdmin):
@@ -19,16 +17,15 @@ class AuthorAdmin(admin.ModelAdmin):
         'date_of_birth',
         'date_of_death')
     fields = ['first_name', 'last_name', ('date_of_birth', 'date_of_death')]
-    inlines = [BooksInline]  # Añadimos el inline aquí
+    inlines = [BooksInline]
 
 
 admin.site.register(Author, AuthorAdmin)
 
 
-# --- REQUISITO DEL TEST: test_new_added_book_visualizations ---
 class BooksInstanceInline(admin.TabularInline):
     model = BookInstance
-    extra = 0  # Requisito del test (eliminar filas vacías extra)
+    extra = 0
 
 
 @admin.register(Book)

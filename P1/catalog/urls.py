@@ -3,12 +3,8 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-
-    # Listado de Libros y Detalle de Libro
     path('books/', views.BookListView.as_view(), name='books'),
     path('book/<int:pk>', views.BookDetailView.as_view(), name='book-detail'),
-
-    # --- DESAFÍO PARTE 6: Listado de Autores y Detalle de Autor ---
     path('authors/', views.AuthorListView.as_view(), name='authors'),
     path(
         'author/<int:pk>',

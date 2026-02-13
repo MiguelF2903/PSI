@@ -54,7 +54,7 @@ class Author(models.Model):
         return f'{self.last_name}, {self.first_name}'
 
 
-# En catalog/models.py
+
 
 class Book(models.Model):
     title = models.CharField(max_length=200)
@@ -69,7 +69,6 @@ class Book(models.Model):
     language = models.ForeignKey(
         'Language', on_delete=models.SET_NULL, null=True)
 
-    # --- CAMBIO 1: Añadir orden alfabético para que "I Robot" salga en la pág 1 --- # noqa: E501
     class Meta:
         ordering = ['title', 'author']
 
@@ -79,7 +78,6 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse('book-detail', args=[str(self.id)])
 
-    # --- CAMBIO 2: Mover display_genre aquí para pasar el test ---
     def display_genre(self):
         """Create a string for the Genre. This is required to display genre in Admin."""  # noqa: E501
         return ', '.join([genre.name for genre in self.genre.all()[:3]])

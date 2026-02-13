@@ -13,7 +13,6 @@ venv/
 .venv/
 .vscode/
 
-.flake8
 staticfiles/
 
 .coverage
