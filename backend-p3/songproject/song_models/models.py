@@ -73,7 +73,12 @@ class SongUser(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.song.title}"
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        self.song.number_times_played += 1
-        self.song.save()
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+@receiver(post_save, sender=SongUser)
+def increment_song_plays(sender, instance, created, **kwargs):
+    if created:
+        instance.song.number_times_played += 1
+        instance.song.save()
