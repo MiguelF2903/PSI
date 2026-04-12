@@ -3,8 +3,9 @@ import requests
 from rest_framework import status
 
 # replace by your URL in render.com
-# BASE_URL = "https://song-54se.onrender.com/api/v1/"
-BASE_URL = "http://localhost:8000/api/v1/"  # Adjust if your endpoint is different
+# replace by your URL in render.com
+BASE_URL = "https://practica3-songproject-11-2311-2026-1.onrender.com/api/v1/"
+# BASE_URL = "http://localhost:8000/api/v1/"
 
 
 class TestDjoserLogin(unittest.TestCase):
@@ -48,7 +49,7 @@ class TestDjoserLogin(unittest.TestCase):
         # then we get users/me
         url = BASE_URL + 'users/me/'
         headers = {
-              'Authorization': f'Token {token}'
+            'Authorization': f'Token {token}'
         }
         response = requests.get(url, headers=headers)
         self.assertEqual(response.status_code, 200)
@@ -90,7 +91,7 @@ class TestDjoserLogin(unittest.TestCase):
         response = requests.post(url, data=data)
         token = response.json().get("auth_token")
         print("Token for user:", token)
-        
+
         # then get users/me for the user id
         url = BASE_URL + 'users/me/'
         headers = {
@@ -101,7 +102,7 @@ class TestDjoserLogin(unittest.TestCase):
         self.assertIn("id", response.json())
         user_id = response.json().get("id")
         print("User ID:", user_id)
-        
+
         # then we need a song to create a songuser
         url = BASE_URL + 'songs/'
         response = requests.get(url)
@@ -113,7 +114,7 @@ class TestDjoserLogin(unittest.TestCase):
         # then we create the songuser
         url = BASE_URL + 'songusers/'
         headers = {
-              'Authorization': f'Token {token}'
+            'Authorization': f'Token {token}'
         }
         data = {
             "song": song_id,
@@ -134,7 +135,7 @@ class TestDjoserLogin(unittest.TestCase):
         url = BASE_URL + 'token/login/'
         response = requests.post(url, data=data)
         token = response.json().get("auth_token")
-        
+
         # then get users/me for the user id
         url = BASE_URL + 'users/me/'
         headers = {
@@ -144,7 +145,7 @@ class TestDjoserLogin(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn("id", response.json())
         user_id = response.json().get("id")
-        
+
         # then we need a song to create a songuser
         url = BASE_URL + 'songs/'
         response = requests.get(url)
@@ -162,7 +163,7 @@ class TestDjoserLogin(unittest.TestCase):
         # then we create the songuser
         url = BASE_URL + 'songusers/'
         headers = {
-              'Authorization': f'Token {token}'
+            'Authorization': f'Token {token}'
         }
         data = {
             "song": song_id,
