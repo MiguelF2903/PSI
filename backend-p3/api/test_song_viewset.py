@@ -17,7 +17,8 @@ class SongAPITestCase(APITestCase):
             "test.jpg", b"image_content", content_type="image/jpeg")
 
         # Create multiple Song instances for testing
-        # This will create 15 songs, which is more than the default page size of 10
+        # This will create 15 songs, which is more
+        # than the default page size of 10
         # to test pagination.
         for i in range(15):
             Song.objects.create(
@@ -66,11 +67,14 @@ class SongAPITestCase(APITestCase):
         self.assertEqual(response.data['title'], song.title)
 
     def test_15_top_songs_default(self):
-        url = reverse('songs-top')  # Adjust this name if your router uses a different basename
+        url = reverse('songs-top')  # Adjust name if router uses diff basename
         response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 3)
-        self.assertGreaterEqual(response.data[0]['number_times_played'], response.data[1]['number_times_played'])
+        self.assertGreaterEqual(
+            response.data[0]['number_times_played'],
+            response.data[1]['number_times_played']
+        )
 
     def test_16_top_songs_with_n_parameter(self):
         url = reverse('songs-top') + '?n=4'
@@ -84,7 +88,7 @@ class SongAPITestCase(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
     def test_20_search_song_by_title_success(self):
-        url = reverse('songs-search')  # Adjust this name to match your router's name
+        url = reverse('songs-search')  # Adjust for router name
         response = self.client.get(url, {'title': '5'})
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
@@ -99,4 +103,3 @@ class SongAPITestCase(APITestCase):
         url = reverse('songs-search')
         response = self.client.get(url)  # No 'title' param
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-

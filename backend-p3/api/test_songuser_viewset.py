@@ -85,4 +85,6 @@ class SongUserAPITestCase(APITestCase):
         url = reverse('songusers-detail', args=[self.song_user.id])
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertFalse(SongUser.objects.filter(id=self.song_user.id).exists())
+        self.assertFalse(
+            SongUser.objects.filter(id=self.song_user.id).exists()
+        )

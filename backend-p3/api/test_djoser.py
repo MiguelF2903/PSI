@@ -1,5 +1,5 @@
 # djoser need to be installed
-from django.test import TestCase, tag
+from django.test import TestCase
 from rest_framework.authtoken.models import Token
 from rest_framework import status
 from django.contrib.auth.models import User
