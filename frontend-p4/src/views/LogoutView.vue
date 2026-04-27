@@ -2,7 +2,7 @@
   <div class="page" style="max-width: 500px; text-align: center; padding-top: 4rem">
     <div class="card">
       <div style="font-size: 3rem; margin-bottom: 1rem">👋</div>
-      <h1 style="font-family: 'Outfit', sans-serif; font-size: 1.8rem; margin-bottom: 0.5rem">You've been logged out</h1>
+      <h1 style="font-family: 'Bebas Neue', cursive; font-size: 3rem; letter-spacing: 0.05em; margin-bottom: 0.5rem">You've been logged out</h1>
       <p style="color: var(--text-secondary); margin-bottom: 1.5rem">
         Your session has been ended successfully. Redirecting to home in
         <strong style="color: var(--accent-cyan)">{{ countdown }}</strong> seconds…

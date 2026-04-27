@@ -1,13 +1,11 @@
 <template>
   <div class="lyrics-wrapper">
-    <!-- Score board shown when song ends -->
     <div v-if="showSummary" class="score-board">
       <h2>🎉 Song Complete!</h2>
       <p class="score-text">Correct answers: <strong>{{ correctCount }}</strong> - Wrong answers: <strong>{{ wrongCount }}</strong></p>
       <RouterLink to="/" class="btn btn-primary">Back to Home</RouterLink>
     </div>
 
-    <!-- Lyrics lines (3 at a time) -->
     <template v-else>
       <div
         v-for="(lineIdx, slot) in visibleSlots"
@@ -18,7 +16,6 @@
           <template v-for="(part, pi) in parsedLines[lineIdx].parts" :key="pi">
             <span v-if="part.type === 'text'">{{ part.text }}</span>
             <template v-else>
-              <!-- Blank word -->
               <span v-if="part.revealed">
                 <input
                   class="blank-input correct"
@@ -27,7 +24,6 @@
                 />
               </span>
               <span v-else-if="slot === 1 && pi === activeBlankIndex">
-                <!-- Active input for current blank -->
                 <input
                   ref="activeInput"
                   class="blank-input"
@@ -53,7 +49,6 @@
         </template>
       </div>
 
-      <!-- Controls -->
       <div style="display: flex; justify-content: center; margin-top: 1rem" v-if="!showSummary && hasActiveBlanks">
         <button class="btn btn-skip" data-cy="skip" @click="skipBlank">Skip</button>
       </div>
@@ -76,12 +71,10 @@ const emit = defineEmits(['stopAudio', 'startAudio', 'summary'])
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || ''
 
-/* ---------- LRC Parsing ---------- */
 function parseLrc(text) {
   const lines = []
   for (const raw of text.split('\n')) {
     const line = raw.replace(/\r$/, '')
-    // Match [mm:ss.xx] or [mm:ss:xx]
     const timeMatch = line.match(/^\[(\d+):(\d+)[.:](\d+)\](.*)/)
     if (!timeMatch) continue
     const minutes = parseInt(timeMatch[1])
@@ -90,7 +83,6 @@ function parseLrc(text) {
     const timestamp = minutes * 60 + seconds + centis / 100
     const lyric = timeMatch[4].trim()
 
-    // parse parts: split on {word} tokens
     const parts = []
     const wordRe = /\{([^}]+)\}/g
     let last = 0
@@ -104,12 +96,10 @@ function parseLrc(text) {
 
     lines.push({ timestamp, parts, lyric })
   }
-  // sort by time
   lines.sort((a, b) => a.timestamp - b.timestamp)
   return lines
 }
 
-/* ---------- State ---------- */
 const parsedLines = ref([])
 const currentLineIndex = ref(0)
 const activeBlankIndex = ref(-1)
@@ -120,8 +110,6 @@ const wrongCount = ref(0)
 const showSummary = ref(false)
 const activeInput = ref(null)
 
-/* ---------- Computed ---------- */
-// slots: [prevIndex, currentIndex, nextIndex]
 const visibleSlots = computed(() => {
   const c = currentLineIndex.value
   return [c - 1, c, c + 1]
@@ -155,7 +143,6 @@ onMounted(async () => {
   }
 })
 
-/* ---------- Time sync ---------- */
 function lineHasBlanks(idx) {
   const line = parsedLines.value[idx]
   if (!line) return false
@@ -174,18 +161,15 @@ watch(() => props.currentTime, (time, oldTime) => {
     else break
   }
 
-  // Detect movement
   const delta = time - (oldTime || 0)
-  const isSeek = Math.abs(delta) > 0.25 // Clear jump
+  const isSeek = Math.abs(delta) > 0.25 
   const isForward = timeTargetIdx > currentLineIndex.value
 
   if (isForward) {
-    // Only pause if it's natural playback and the CURRENT line still has blanks
     if (!isSeek && lineHasBlanks(currentLineIndex.value)) {
       emit('stopAudio')
       return 
     }
-    // Advance and mark skipped as wrong
     for (let i = currentLineIndex.value; i < timeTargetIdx; i++) {
       for (const part of lines[i].parts) {
         if (part.type === 'blank' && !part.revealed) {
@@ -197,7 +181,6 @@ watch(() => props.currentTime, (time, oldTime) => {
     currentLineIndex.value = timeTargetIdx
     findActiveBlank()
   } else if (timeTargetIdx < currentLineIndex.value) {
-    // Backward movement: un-reveal if it's a seek
     if (isSeek) {
       for (let i = timeTargetIdx; i < lines.length; i++) {
         for (const part of lines[i].parts) {
@@ -210,12 +193,9 @@ watch(() => props.currentTime, (time, oldTime) => {
   }
 })
 
-/* ---------- Song ended ---------- */
 watch(() => props.songEnded, (val) => {
   if (val) finishSong()
 })
-
-/* ---------- Helpers ---------- */
 function findActiveBlank() {
   userInput.value = ''
   showWrong.value = false
@@ -226,7 +206,6 @@ function findActiveBlank() {
   const idx = currentLine.value.parts.findIndex((p) => p.type === 'blank' && !p.revealed)
   activeBlankIndex.value = idx
   if (idx === -1) {
-    // No blanks in this line — audio can continue freely
     emit('startAudio')
   }
   nextTick(() => {
@@ -246,17 +225,14 @@ function checkInput() {
   const expected = part.word.toLowerCase()
 
   if (typed === expected) {
-    // Correct!
     part.revealed = true
     correctCount.value++
     userInput.value = ''
     showWrong.value = false
-    // Advance to next blank in line
     const nextBlankIdx = currentLine.value.parts.findIndex(
       (p, i) => p.type === 'blank' && !p.revealed && i > activeBlankIndex.value
     )
     if (nextBlankIdx === -1) {
-      // No more blanks in this line — resume audio
       activeBlankIndex.value = -1
       emit('startAudio')
       checkIfFinished()
@@ -268,13 +244,10 @@ function checkInput() {
       })
     }
   } else {
-    // Wrong
     wrongCount.value++
     showWrong.value = true
     userInput.value = ''
-    // Pause audio
     emit('stopAudio')
-    // Flash wrong state then reset
     setTimeout(() => { showWrong.value = false }, 400)
   }
 }
@@ -314,7 +287,6 @@ function checkIfFinished() {
 }
 
 function finishSong() {
-  // Reveal any remaining blanks
   for (const line of parsedLines.value) {
     for (const part of line.parts) {
       if (part.type === 'blank' && !part.revealed) {

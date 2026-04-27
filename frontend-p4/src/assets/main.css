@@ -1,46 +1,64 @@
-/* -----------------------------------------------
-   SongProject — Global Design System
------------------------------------------------ */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600&display=swap');
 
 :root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #faf8f2;
-  --bg-card: #ffffff;
-  --bg-card-hover: #fffefb;
-  --accent-purple: #b8860b; /* Dark Goldenrod */
-  --accent-pink: #d4af37;   /* Metallic Gold */
-  --accent-cyan: #8a6a24;   /* Golden Brown */
-  --accent-green: #2d5a27;
-  --accent-red: #a52a2a;
-  --text-primary: #1c1917;
-  --text-secondary: #57534e;
-  --text-muted: #a8a29e;
-  --border: rgba(184,134,11,0.15);
-  --border-focus: rgba(184,134,11,0.5);
-  --gradient: linear-gradient(135deg, #bf953f, #aa771c);
-  --gradient-gold: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728);
-  --shadow-glow: 0 10px 40px rgba(184,134,11,0.12);
-  --radius: 12px;
-  --radius-sm: 8px;
-  --transition: 0.25s ease;
+  --bg-primary: #F5F5F0;
+  --bg-secondary: #EFEBE0;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #FCFAF7;
+  --accent-primary: #4A4E69;
+  --accent-secondary: #9A8C98;
+  --accent-warm: #C9ADA7;
+  --accent-green: #6B705C;
+  --accent-red: #A5A58D;
+  --text-primary: #222222;
+  --text-secondary: #4A4E69;
+  --text-muted: #9A8C98;
+  --border: rgba(74, 78, 105, 0.1);
+  --border-focus: rgba(74, 78, 105, 0.3);
+  --gradient: linear-gradient(135deg, #4A4E69, #9A8C98);
+  --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --radius: 8px;
+  --radius-sm: 4px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-html { font-size: 16px; scroll-behavior: smooth; }
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Bebas Neue', cursive;
   background: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
-  line-height: 1.6;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
 }
 
-a { color: inherit; text-decoration: none; }
+a {
+  color: inherit;
+  text-decoration: none;
+}
 
-/* ---- Layout ---- */
 .page {
   min-height: calc(100vh - 70px);
   padding: 2rem 1rem;
@@ -48,10 +66,9 @@ a { color: inherit; text-decoration: none; }
   margin: 0 auto;
 }
 
-/* ---- Navbar ---- */
 .navbar {
   height: 70px;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
   display: flex;
@@ -61,17 +78,21 @@ a { color: inherit; text-decoration: none; }
   top: 0;
   z-index: 100;
 }
+
 .navbar .brand {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.4rem;
-  font-weight: 700;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+  color: var(--accent-primary);
   margin-right: 2.5rem;
 }
-.navbar nav { display: flex; gap: 0.5rem; margin-left: auto; }
+
+.navbar nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
 .nav-link {
   padding: 0.45rem 1rem;
   border-radius: var(--radius-sm);
@@ -80,12 +101,13 @@ a { color: inherit; text-decoration: none; }
   font-weight: 500;
   transition: all var(--transition);
 }
-.nav-link:hover, .nav-link.router-link-active {
-  color: var(--accent-purple);
-  background: rgba(184,134,11,0.08);
+
+.nav-link:hover,
+.nav-link.router-link-active {
+  color: var(--accent-primary);
+  background: var(--bg-secondary);
 }
 
-/* ---- Cards ---- */
 .card {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -93,9 +115,12 @@ a { color: inherit; text-decoration: none; }
   padding: 1.5rem;
   transition: all var(--transition);
 }
-.card:hover { background: var(--bg-card-hover); border-color: rgba(124,58,237,0.3); }
 
-/* ---- Song List Item ---- */
+.card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
 .song-item {
   display: flex;
   align-items: center;
@@ -110,29 +135,48 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   color: var(--text-primary);
 }
+
 .song-item:hover {
   background: var(--bg-card-hover);
-  border-color: rgba(124,58,237,0.4);
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-glow);
+  border-color: var(--accent-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-subtle);
 }
+
 .song-rank {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
   color: var(--text-muted);
   min-width: 2rem;
   text-align: center;
 }
-.song-info { flex: 1; }
-.song-title { font-weight: 600; font-size: 1rem; }
-.song-artist { font-size: 0.85rem; color: var(--text-secondary); }
+
+.song-info {
+  flex: 1;
+}
+
+.song-title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.3rem;
+  letter-spacing: 0.03em;
+  color: var(--text-primary);
+}
+
+.song-artist {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
 .song-plays {
-  font-size: 0.8rem;
-  color: var(--accent-cyan);
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: var(--accent-primary);
   white-space: nowrap;
 }
 
-/* ---- Buttons ---- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -141,106 +185,176 @@ a { color: inherit; text-decoration: none; }
   padding: 0.65rem 1.4rem;
   border-radius: var(--radius-sm);
   border: none;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
   cursor: pointer;
   transition: all var(--transition);
 }
+
 .btn-primary {
-  background: var(--gradient);
+  background: var(--accent-primary);
   color: white;
-  box-shadow: 0 4px 15px rgba(124,58,237,0.3);
+  text-transform: uppercase;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1.8rem;
 }
-.btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(124,58,237,0.4); }
+
+.btn-primary:hover {
+  background: var(--accent-secondary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-subtle);
+}
+
 .btn-secondary {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255, 255, 255, 0.05);
   color: var(--text-primary);
   border: 1px solid var(--border);
 }
-.btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 .btn-danger {
   background: var(--accent-red);
   color: white;
 }
-.btn-skip {
-  background: rgba(239,68,68,0.15);
-  color: var(--accent-red);
-  border: 1px solid rgba(239,68,68,0.3);
-}
-.btn-skip:hover { background: rgba(239,68,68,0.25); }
 
-/* ---- Forms ---- */
-.form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
-.form-group label { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); }
+.btn-skip {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--accent-red);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.btn-skip:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
 .form-group input {
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   padding: 0.7rem 1rem;
   color: var(--text-primary);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.95rem;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
   transition: all var(--transition);
   outline: none;
 }
-.form-group input:focus { border-color: var(--border-focus); box-shadow: 0 0 0 3px rgba(124,58,237,0.15); }
 
-/* ---- Search bar ---- */
-.search-bar { display: flex; gap: 0.75rem; }
-.search-bar input { flex: 1; }
+.form-group input:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
 
-/* ---- Section titles ---- */
+.search-bar {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.search-bar input {
+  flex: 1;
+}
+
 .section-title {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--text-primary);
-}
-.section-title span {
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 2.2rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.5rem;
+  color: var(--accent-primary);
+  border-bottom: 2px solid var(--accent-warm);
+  display: inline-block;
+  padding-bottom: 0.25rem;
 }
 
-/* ---- Page hero ---- */
+.section-title span {
+  color: var(--accent-secondary);
+}
+
 .hero {
   text-align: center;
   padding: 3rem 1rem 2rem;
 }
+
 .hero h1 {
-  font-family: 'Outfit', sans-serif;
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 700;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-family: 'Bebas Neue', cursive;
+  font-size: clamp(3rem, 8vw, 5rem);
+  color: var(--accent-primary);
   margin-bottom: 0.75rem;
+  line-height: 0.9;
 }
-.hero p { color: var(--text-secondary); max-width: 500px; margin: 0 auto 1.5rem; }
+
+.hero p {
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin: 0 auto 1.5rem;
+}
 
 /* ---- Error / Alert ---- */
-.alert { padding: 0.8rem 1rem; border-radius: var(--radius-sm); font-size: 0.9rem; margin-bottom: 1rem; }
-.alert-error { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); color: #fca5a5; }
-.alert-success { background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.3); color: #6ee7b7; }
-.alert-info { background: rgba(6,182,212,0.12); border: 1px solid rgba(6,182,212,0.3); color: #67e8f9; }
+.alert {
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
 
-/* ---- Loading spinner ---- */
+.alert-error {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+}
+
+.alert-success {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #6ee7b7;
+}
+
+.alert-info {
+  background: rgba(6, 182, 212, 0.12);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  color: #67e8f9;
+}
+
 .spinner {
-  width: 40px; height: 40px;
+  width: 40px;
+  height: 40px;
   border: 3px solid var(--border);
   border-top-color: var(--accent-purple);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   margin: 2rem auto;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
 
-/* ---- Lyrics display ---- */
-.lyrics-wrapper { position: relative; max-width: 700px; margin: 0 auto; }
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.lyrics-wrapper {
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
 .lyrics-line {
   padding: 0.75rem 1.2rem;
   border-radius: var(--radius-sm);
@@ -249,37 +363,66 @@ a { color: inherit; text-decoration: none; }
   transition: all 0.3s ease;
   color: var(--text-muted);
 }
+
 .lyrics-line.is-current {
   color: var(--text-primary);
-  background: rgba(184,134,11,0.08);
-  border-left: 3px solid var(--accent-pink);
-  font-size: 1.1rem;
+  background: var(--bg-secondary);
+  border-left: 4px solid var(--accent-secondary);
+  font-size: 1.2rem;
+  font-weight: 500;
 }
-.lyrics-line.is-prev, .lyrics-line.is-next {
+
+.lyrics-line.is-prev,
+.lyrics-line.is-next {
   opacity: 0.5;
 }
 
-/* ---- Blank input ---- */
 .blank-input {
-  background: rgba(184,134,11,0.04);
+  background: rgba(184, 134, 11, 0.04);
   border: 1px solid var(--accent-pink);
   border-radius: 6px;
   padding: 0.15rem 0.5rem;
   color: var(--text-primary);
-  font-family: 'Inter', sans-serif;
-  font-size: 1rem;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
   width: 120px;
   outline: none;
   vertical-align: baseline;
   transition: all var(--transition);
 }
-.blank-input:focus { border-color: var(--accent-pink); box-shadow: 0 0 0 3px rgba(236,72,153,0.2); }
-.blank-input.correct { border-color: var(--accent-green); background: rgba(16,185,129,0.1); color: var(--accent-green); }
-.blank-input.wrong { border-color: var(--accent-red); background: rgba(239,68,68,0.1); animation: shake 0.3s; }
+
+.blank-input:focus {
+  border-color: var(--accent-pink);
+  box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+}
+
+.blank-input.correct {
+  border-color: var(--accent-green);
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--accent-green);
+}
+
+.blank-input.wrong {
+  border-color: var(--accent-red);
+  background: rgba(239, 68, 68, 0.1);
+  animation: shake 0.3s;
+}
+
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-4px); }
-  75% { transform: translateX(4px); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-4px);
+  }
+
+  75% {
+    transform: translateX(4px);
+  }
 }
 
 /* ---- Score display ---- */
@@ -291,21 +434,37 @@ a { color: inherit; text-decoration: none; }
   padding: 2.5rem;
   animation: fadeIn 0.5s ease;
 }
+
 .score-board h2 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.8rem;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 3rem;
+  letter-spacing: 0.05em;
   margin-bottom: 1rem;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--accent-primary);
 }
-.score-text { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 1.5rem; }
-.score-text strong { color: var(--text-primary); }
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.score-text {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
 
-/* ---- Audio player ---- */
+.score-text strong {
+  color: var(--text-primary);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .audio-player {
   background: var(--bg-card);
   border: 1px solid var(--border);
@@ -316,7 +475,13 @@ a { color: inherit; text-decoration: none; }
   gap: 1rem;
   flex-wrap: wrap;
 }
-.audio-controls { display: flex; align-items: center; gap: 0.5rem; }
+
+.audio-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .progress-bar {
   flex: 1;
   height: 4px;
@@ -326,22 +491,51 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   min-width: 100px;
 }
+
 .progress-fill {
   height: 100%;
   background: var(--gradient);
   border-radius: 2px;
   transition: width 0.1s linear;
 }
-.time-label { font-size: 0.8rem; color: var(--text-muted); min-width: 80px; text-align: center; }
+
+.time-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  min-width: 80px;
+  text-align: center;
+}
 
 /* ---- Play view layout ---- */
-.play-layout { display: flex; flex-direction: column; gap: 1.5rem; }
-.play-header { display: flex; align-items: center; gap: 1rem; }
+.play-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.play-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .play-cover {
-  width: 80px; height: 80px;
+  width: 80px;
+  height: 80px;
   border-radius: var(--radius-sm);
   object-fit: cover;
   border: 1px solid var(--border);
 }
-.play-meta h2 { font-family: 'Outfit', sans-serif; font-size: 1.4rem; font-weight: 700; }
-.play-meta p { color: var(--text-secondary); font-size: 0.9rem; }
+
+.play-meta h2 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 2.5rem;
+  letter-spacing: 0.05em;
+}
+
+.play-meta p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

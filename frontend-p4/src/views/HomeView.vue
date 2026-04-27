@@ -2,10 +2,9 @@
   <div class="page animate-in">
     <div class="hero">
       <h1>Learn Songs by Ear 🎵</h1>
-      <p>Listen to songs and fill in the missing lyrics. Improve your listening skills while enjoying great music.</p>
+      <p>Listen to songs and fill in the missing lyrics.</p>
     </div>
 
-    <!-- Search -->
     <div class="card shadow-glow" style="margin-bottom: 2rem">
       <p class="section-title">Search <span>Songs</span></p>
       <div class="search-bar">

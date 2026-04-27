@@ -47,9 +47,10 @@ const faqs = [
   text-align: left;
 }
 .faq-question {
-  color: var(--accent-cyan);
-  font-family: 'Outfit', sans-serif;
-  font-size: 1.1rem;
+  color: var(--accent-primary);
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
   margin-bottom: 0.75rem;
 }
 .faq-answer {

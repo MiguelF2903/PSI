@@ -82,7 +82,7 @@ function startTicker() {
   if (ticker) return
   ticker = setInterval(() => {
     emitTimeUpdate()
-  }, 50) // Update every 50ms (20fps)
+  }, 50) 
 }
 
 function stopTicker() {
